@@ -1,3 +1,5 @@
-import counterComponent from './Counter';
+import counterComponents from './Counter';
 
-counterComponent();
+counterComponents();
+
+// setTimeout(counterComponents, 2_000);

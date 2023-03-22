@@ -1,23 +1,46 @@
-import {
-  h,
-  FunctionalComponent,
-  render,
-  Fragment,
-  RenderableProps,
-} from 'preact';
+import { FunctionalComponent, JSX, render } from 'preact';
 
-// I want to have a query selector and a component that has a dataset attribute, so we can use the component in our project
-export const useComponent = <
-  T extends { dataset?: DOMStringMap } & { [key: string]: any }
->(
+type DataElement = {
+  dataset: DOMStringMap;
+  children: DataElement[];
+};
+
+/**
+ * Renders a component inside the html element that matches the given query selector
+ * @param querySelector the element in which the component will be rendered
+ * @param componentFactory a component returning fn that takes the dataset attribute from the html element that matches the given query selector
+ *
+ * @example
+ * useComponent('.js-secret-links', () => <SecretLinks/>)
+ * useDataComponent('.js-secret-links', (dataset) => (
+ *    <SecretLinks
+ *      useLimit={dataset.use_limit}
+ *      expiryDate={dataset.expiry_date}/>
+ * ));
+ */
+export const useComponent = (
   querySelector: string,
-  Component: FunctionalComponent<T>,
-  props: Omit<T, 'dataset'>
+  componentFactory: (dataset: DOMStringMap | undefined) => JSX.Element
 ) => {
   const element = document.querySelector(querySelector);
-
   if (!(element instanceof HTMLElement)) return;
+  element.innerHTML = '';
 
-  const allprops = { dataset: element.dataset, ...props };
-  render(<Component {...(props as any)} />, element);
+  render(componentFactory(element.dataset), element);
+};
+
+export const useDataComponent = (
+  querySelector: string,
+  componentFactory: (dataset: DOMStringMap) => JSX.Element
+) => {
+  const element = document.querySelector(querySelector);
+  if (!(element instanceof HTMLElement)) return;
+  if (!element.dataset) {
+    console.error(
+      `dataset missing on element ${element.tagName} ${querySelector}`
+    );
+    return;
+  }
+  element.innerHTML = '';
+  render(componentFactory(element.dataset), element);
 };

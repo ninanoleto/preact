@@ -1,26 +1,37 @@
-import { useComponent } from './preact';
+import { useDataComponent } from './preact';
 import { useState } from 'preact/hooks';
 
 type Props = {
-  dataset?: DOMStringMap;
-  url: string;
+  name: string;
+  age: number;
 };
 
-export const Counter = ({ dataset }: Props) => {
-  console.log({ dataset });
-
-  const [count, setCount] = useState(0);
+export const Counter = ({ name, age }: Props) => {
+  const [count, setCount] = useState(age);
 
   return (
-    <div className='class' onClick={() => setCount((oldCount) => oldCount + 1)}>
-      Hello {dataset?.name} - {count}
+    <div className='class'>
+      Hello {name} you are {count} years old
+      <br />
+      <button onClick={() => setCount((oldCount) => oldCount + 1)}>
+        age person
+      </button>
     </div>
   );
 };
 
-const counterComponent = () => {
-  const url = 'ble';
-  useComponent('.counter-component', Counter, { url });
+const counterComponents = () => {
+  useDataComponent('.counter-component1', (dataset) => (
+    <Counter name={dataset.name!} age={Number(dataset.age!)} />
+  ));
+
+  useDataComponent('.counter-component2', (dataset) => {
+    const json = dataset.json;
+    if (!json) throw new Error('invalid dataset');
+
+    const props = JSON.parse(json);
+    return <Counter name={props.name} age={props.age} />;
+  });
 };
 
-export default counterComponent;
+export default counterComponents;
