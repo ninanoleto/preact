@@ -26,9 +26,10 @@ const counterComponents = () => {
   ));
 
   useDataComponent('.counter-component2', (dataset) => {
-    const json = dataset.json;
-    if (!json) throw new Error('invalid dataset');
+    const encodedJson = dataset.json;
+    if (!encodedJson) throw new Error('invalid dataset');
 
+    const json = decodeURI(encodedJson);
     const props = JSON.parse(json);
     return <Counter name={props.name} age={props.age} />;
   });
