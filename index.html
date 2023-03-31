@@ -5,20 +5,31 @@
     <title>Webpack App</title>
   </head>
   <body>
-    <h1>Hello world!</h1>
-    <h2>Tip: Check your console</h2>
+    <h3>Tip: Check index.ts</h3>
 
-    <div class="counter-component1" data-name="nina" data-age="30">
-      COOL LOADING SKELETON
-    </div>
+    <!-- This is for component Counter.tsx -->
+    <div class="js-counter" data-name="nina" data-age="30"></div>
 
     <br />
+    <hr />
+    <br />
 
+    <!-- This is for component MemberProfile.tsx -->
     <div
-      class="counter-component2"
-      data-json="%7B%22name%22:%22nina%22,%22age%22:30%7D"
-    >
-      COOL LOADING SKELETON
-    </div>
+      class="js-member-profile"
+      data-first_name="George"
+      data-last_name="Bluth"
+      data-avatar="https://reqres.in/img/faces/1-image.jpg"
+    ></div>
+
+    <br />
+    <hr />
+    <br />
+
+    <!-- This is for component Films.tsx -->
+    <div
+      class="js-films"
+      data-json="%5B%7B%22id%22%3A0%2C%22title%22%3A%22The%20Shawshank%20Redemption%22%2C%22releasedAt%22%3A%221994-09-05%22%7D%2C%7B%22id%22%3A1%2C%22title%22%3A%22Bla%22%2C%22releasedAt%22%3A%221993-10-20%22%7D%2C%7B%22id%22%3A2%2C%22title%22%3A%22Ble%22%2C%22releasedAt%22%3A%222016-02-10%22%7D%2C%7B%22id%22%3A3%2C%22title%22%3A%22Bli%22%2C%22releasedAt%22%3A%221991-05-09%22%7D%2C%7B%22id%22%3A4%2C%22title%22%3A%22Blo%22%2C%22releasedAt%22%3A%222005-12-17%22%7D%5D"
+    ></div>
   </body>
 </html>

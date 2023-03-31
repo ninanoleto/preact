@@ -1,9 +1,4 @@
-import { FunctionalComponent, JSX, render } from 'preact';
-
-type DataElement = {
-  dataset: DOMStringMap;
-  children: DataElement[];
-};
+import { JSX, render } from 'preact';
 
 /**
  * Renders a component inside the html element that matches the given query selector
@@ -12,6 +7,7 @@ type DataElement = {
  *
  * @example
  * useComponent('.js-secret-links', () => <SecretLinks/>)
+ *
  * useDataComponent('.js-secret-links', (dataset) => (
  *    <SecretLinks
  *      useLimit={dataset.use_limit}

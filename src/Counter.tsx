@@ -1,38 +1,27 @@
-import { useDataComponent } from './preact';
+import { useComponent } from './preact';
 import { useState } from 'preact/hooks';
 
-type Props = {
-  name: string;
-  age: number;
-};
+// This is the simplest kind of stateful component you can have in react: a simple counter that increases everytime you click on a button
+export const Counter = () => {
+  const [count, setCount] = useState(0);
 
-export const Counter = ({ name, age }: Props) => {
-  const [count, setCount] = useState(age);
+  const increaseCount = () => {
+    setCount((oldCount) => oldCount + 1);
+  };
 
   return (
-    <div className='class'>
-      Hello {name} you are {count} years old
+    <div className='c-counter'>
+      The count is: {count}
       <br />
-      <button onClick={() => setCount((oldCount) => oldCount + 1)}>
-        age person
-      </button>
+      <button onClick={increaseCount}>age person</button>
     </div>
   );
 };
 
-const counterComponents = () => {
-  useDataComponent('.counter-component1', (dataset) => (
-    <Counter name={dataset.name!} age={Number(dataset.age!)} />
-  ));
-
-  useDataComponent('.counter-component2', (dataset) => {
-    const encodedJson = dataset.json;
-    if (!encodedJson) throw new Error('invalid dataset');
-
-    const json = decodeURI(encodedJson);
-    const props = JSON.parse(json);
-    return <Counter name={props.name} age={props.age} />;
-  });
+// This is a setup function that calls a helper made specifically for this project.
+// It's pupose is to set up the React component to render on a specific html element on the page
+const counterComponent = () => {
+  useComponent('.js-counter', () => <Counter />);
 };
 
-export default counterComponents;
+export default counterComponent;

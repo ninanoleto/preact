@@ -1,5 +1,12 @@
-import counterComponents from './Counter';
+import counterComponent from './Counter';
+import filmsComponent from './Films';
+import memberProfileComponent from './MemberProfile';
 
-counterComponents();
+// Start here, simple statful React component
+counterComponent();
 
-// setTimeout(counterComponents, 2_000);
+// Component with server side data, updated on the client side
+memberProfileComponent();
+
+// Component using JSON data from the server side
+filmsComponent();
