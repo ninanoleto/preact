@@ -1,15 +1,13 @@
-# 🚀 Welcome to your new awesome project!
+# Prect Widgets Example
 
-This project has been created using **webpack-cli**, you can now run
-
-```
-npm run build
-```
-
-or
+To run locally:
 
 ```
-yarn build
+yarn install
 ```
 
-to bundle your application
+then
+
+```
+yarn serve
+```
