@@ -5,7 +5,7 @@
     "moduleResolution": "node",
     "module": "es6",
     "target": "es5",
-    "allowJs": false,
+    "allowJs": true,
     "jsx": "react-jsx",
     "jsxImportSource": "preact",
     "strictNullChecks": true,
